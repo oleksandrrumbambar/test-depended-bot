@@ -1,9 +1,0 @@
-pull_requests:
-  rules:
-    - name: Auto-merge Dependabot updates
-      conditions:
-        - title~=.*dependabot.*
-        - status-success=ci/circleci: build  # Успішне проходження тестів
-      actions:
-        merge:
-          method: merge
