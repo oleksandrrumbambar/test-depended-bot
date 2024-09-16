@@ -1,9 +1,21 @@
-pull_requests:
-  rules:
-    - name: Auto-merge Dependabot updates
-      conditions:
-        - title~=.*dependabot.*
-        - status-success=ci/circleci: build  # Успішне проходження тестів
-      actions:
-        merge:
-          method: merge
+name: automatically merge dependabot PR's
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  auto-merge-dependabot:
+    name: :robot_face: Auto merge dependabot PR
+    timeout-minutes: 10
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - name: :robot_face: Merge PR from dependabot
+        uses: fastify/github-action-merge-dependabot@v3.6.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          target: minor
+          merge-method: squash
