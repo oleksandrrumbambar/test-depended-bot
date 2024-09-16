@@ -6,3 +6,4 @@ updates:
       interval: "daily"  # Перевіряти оновлення щоденно
     commit-message:
       prefix: "deps"  # Префікс для повідомлення коміту
+    open-pull-requests-limit: 1
